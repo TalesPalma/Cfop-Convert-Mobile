@@ -1,6 +1,8 @@
 package com.talespalma.cfopconvertmobile.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.talespalma.cfopconvertmobile.database.dao.CfopConsumoDao
 import com.talespalma.cfopconvertmobile.database.dao.CfopIndustrializacaoDao
@@ -14,7 +16,29 @@ import com.talespalma.cfopconvertmobile.database.entitys.CfopRevenda
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun cfopRevendaDao() : CfopRevendaDao
-    abstract  fun cfopIndustrializacaoDao() : CfopIndustrializacaoDao
-    abstract  fun cfopConsumoDao() : CfopConsumoDao
- }
+    abstract fun cfopRevendaDao(): CfopRevendaDao
+    abstract fun cfopIndustrializacaoDao(): CfopIndustrializacaoDao
+    abstract fun cfopConsumoDao(): CfopConsumoDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+        fun getInstance(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "cfop_conver_database"
+                )
+                    .createFromAsset("database/cfops.db")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
+            }
+
+        }
+    }
+}
+
+
+
