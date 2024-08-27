@@ -20,24 +20,27 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun cfopIndustrializacaoDao(): CfopIndustrializacaoDao
     abstract fun cfopConsumoDao(): CfopConsumoDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-        fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "cfop_conver_database"
-                )
-                    .createFromAsset("database/cfops.db")
-                    .fallbackToDestructiveMigration()
-                    .build()
-                    .also { INSTANCE = it }
-            }
+    // O Hilt cuida disso aqui agora.
+    // VEJA O DatabaseModule é muito legal isso.
+//    companion object {
+//        @Volatile
+//        private var INSTANCE: AppDatabase? = null
+//        fun getInstance(context: Context): AppDatabase {
+//            return INSTANCE ?: synchronized(this) {
+//                INSTANCE ?: Room.databaseBuilder(
+//                    context.applicationContext,
+//                    AppDatabase::class.java,
+//                    "cfop_conver_database"
+//                )
+//                    .createFromAsset("database/cfops.db")
+//                    .fallbackToDestructiveMigration()
+//                    .build()
+//                    .also { INSTANCE = it }
+//            }
 
-        }
-    }
+//        }
+//    }
+
 }
 
 
