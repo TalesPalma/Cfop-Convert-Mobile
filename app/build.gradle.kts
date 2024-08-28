@@ -49,6 +49,9 @@ android {
 
 dependencies {
 
+    //Depedencias do Android Compose Navigation
+    implementation(libs.androidx.navigation.compose)
+
     // Depedencias do Android room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
@@ -57,6 +60,9 @@ dependencies {
     //Depedencias do Android Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+
+    //Depedencias do kotlin
+    implementation(libs.kotlinx.serialization.json)
 
     //Depedencias padrão do kotlin com o android
     implementation(libs.androidx.core.ktx)

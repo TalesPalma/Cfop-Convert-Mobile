@@ -19,8 +19,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun cfopIndustrializacaoDao(): CfopIndustrializacaoDao
     abstract fun cfopConsumoDao(): CfopConsumoDao
 
-
-
 }
 
 
