@@ -1,7 +1,8 @@
-package com.talespalma.cfopconvertmobile.database
+package com.talespalma.cfopconvertmobile.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.talespalma.cfopconvertmobile.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
 
         @Provides
         @Singleton

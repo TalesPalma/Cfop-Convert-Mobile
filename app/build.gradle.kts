@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp) // Processador de código ksp (keep updating)
+    alias(libs.plugins.hilt) // Injetor de dependências do Hilt
 }
 
 android {
@@ -24,8 +24,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -39,19 +38,27 @@ android {
     buildFeatures {
         compose = true
     }
+
+
+    //Criar o schemas do bd na location do projeto.
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+
 }
 
 dependencies {
-    // Android room
+
+    // Depedencias do Android room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-    //Hilt android
+    //Depedencias do Android Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-
+    //Depedencias padrão do kotlin com o android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
