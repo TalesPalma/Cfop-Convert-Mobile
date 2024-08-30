@@ -58,7 +58,5 @@ fun Home(
 @Preview(showSystemUi = true)
 @Composable
 private fun HomePreview() {
-    CfopConvertMobileTheme {
-
-    }
+    CfopConvertMobileTheme {}
 }

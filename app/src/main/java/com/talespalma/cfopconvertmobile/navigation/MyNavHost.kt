@@ -7,11 +7,11 @@ import androidx.navigation.compose.NavHost
 import com.talespalma.cfopconvertmobile.database.AppDatabase
 
 @Composable
-fun MyNavHost(modifier: Modifier = Modifier, db: AppDatabase, navController: NavHostController) {
+fun MyNavHost(modifier: Modifier = Modifier,navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = RoutesNav.Home.name
     ) {
-        myNavGraph(db,modifier)
+        myNavGraph(modifier)
     }
 }
