@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var db: AppDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

@@ -60,6 +60,7 @@ dependencies {
     //Depedencias do Android Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compose)
 
     //Depedencias do kotlin
     implementation(libs.kotlinx.serialization.json)

@@ -12,6 +12,6 @@ fun MyNavHost(modifier: Modifier = Modifier, db: AppDatabase, navController: Nav
         navController = navController,
         startDestination = RoutesNav.Home.name
     ) {
-        myNavGraph(navController, db,modifier)
+        myNavGraph(db,modifier)
     }
 }
