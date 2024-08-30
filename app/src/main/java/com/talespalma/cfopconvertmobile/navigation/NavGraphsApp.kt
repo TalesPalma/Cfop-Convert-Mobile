@@ -13,6 +13,6 @@ fun NavGraphBuilder.myNavGraph(
         Home(modifier = modifier)
     }
     composable(RoutesNav.Contact.name) {
-        ContactScreen(name = "Tales", modifier = modifier)
+        ContactScreen(modifier = modifier)
     }
 }
