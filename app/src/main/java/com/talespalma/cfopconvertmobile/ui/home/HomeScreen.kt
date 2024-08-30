@@ -35,12 +35,10 @@ fun Home(modifier: Modifier = Modifier, db: AppDatabase?, navController: NavCont
 
     var categorySelected by remember { mutableIntStateOf(1) }
     val cfops: SnapshotStateList<Cfop> = remember { mutableStateListOf() }
-    Column(modifier = Modifier.padding(30.dp)) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+
         Column(
             modifier = Modifier
-                .padding(30.dp)
-                .fillMaxWidth()
-                .align(Alignment.End)
         ) {
             Row {
                 RadioButton(onClick = { categorySelected = 1 }, selected = (categorySelected == 1))
@@ -129,10 +127,6 @@ fun Home(modifier: Modifier = Modifier, db: AppDatabase?, navController: NavCont
     }
 
 }
-
-
-
-
 
 
 @Preview(showSystemUi = true)

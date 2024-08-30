@@ -14,10 +14,9 @@ import androidx.navigation.NavHostController
 @Composable
 fun ContactScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController,
     name: String?
 ) {
-    Column(modifier.background(Color.Red)) {
+    Column(modifier = modifier) {
         Text(text = "Ola $name", modifier = Modifier.padding(100.dp))
     }
 }
