@@ -33,7 +33,7 @@ fun DropBoxList(
     uiState: HomeScreenState
 ) {
 
-    Box(modifier = Modifier.padding(top = 50.dp, end = 5.dp, start = 5.dp, bottom = 30.dp)){
+    Box(modifier = Modifier.padding(top = 50.dp, end = 5.dp, start = 5.dp, bottom = 30.dp)) {
         Row(
             modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))

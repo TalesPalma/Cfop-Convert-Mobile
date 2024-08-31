@@ -9,8 +9,8 @@ import com.talespalma.cfopconvertmobile.models.CfopDTO
 data class CfopConsumo(
     @PrimaryKey val code : String,
     @ColumnInfo val converting: String,
-){
-    fun converterToDto() = CfopDTO(
+) : ICfopEntity{
+    override fun converterToDto() = CfopDTO(
         code = code,
         covertindCode = converting
     )
