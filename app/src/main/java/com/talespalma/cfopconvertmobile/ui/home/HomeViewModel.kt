@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                     updateCfopSelected(uiState.value.cfops[0].code)
-                    updateCfopSelected(uiState.value.cfops[0].covertindCode)
+                    updateCfopConvetido(uiState.value.cfops[0].covertindCode)
                 }
 
                 2 -> db?.cfopRevendaDao()?.getAll()?.collect {
@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                     updateCfopSelected(uiState.value.cfops[0].code)
-                    updateCfopSelected(uiState.value.cfops[0].covertindCode)
+                    updateCfopConvetido(uiState.value.cfops[0].covertindCode)
                 }
 
                 3 -> db?.cfopIndustrializacaoDao()?.getAll()?.collect {
@@ -70,7 +70,7 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                     updateCfopSelected(uiState.value.cfops[0].code)
-                    updateCfopSelected(uiState.value.cfops[0].covertindCode)
+                    updateCfopConvetido(uiState.value.cfops[0].covertindCode)
                 }
             }
         }
