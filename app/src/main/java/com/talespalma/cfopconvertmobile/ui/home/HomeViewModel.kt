@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.talespalma.cfopconvertmobile.database.AppDatabase
-import com.talespalma.cfopconvertmobile.models.Cfop
+import com.talespalma.cfopconvertmobile.models.CfopDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 data class HomeScreenState(
     var categorySelected: Int = 1,
-    val cfops: MutableList<Cfop> = emptyList<Cfop>().toMutableList(),
+    val cfops: MutableList<CfopDTO> = emptyList<CfopDTO>().toMutableList(),
     var expanded: Boolean = false,
     var cfopSelected: String = "",
     var cfopConvetido: String = ""
@@ -34,47 +34,30 @@ class HomeViewModel @Inject constructor(
                 1 -> db?.cfopConsumoDao()?.getAll()?.collect {
                     uiState.value.cfops.clear()
                     for (cfop in it) {
-                        uiState.value.cfops.add(
-                            Cfop(
-                                code = cfop.code,
-                                covertindCode = cfop.converting
-                            )
-                        )
+                        uiState.value.cfops.add(cfop.converterToDto())
                     }
-                    updateCfopSelected(uiState.value.cfops[0].code)
-                    updateCfopConvetido(uiState.value.cfops[0].covertindCode)
+                    updateViewCfops()
                 }
 
                 2 -> db?.cfopRevendaDao()?.getAll()?.collect {
                     uiState.value.cfops.clear()
                     for (cfop in it) {
-                        uiState.value.cfops.add(
-                            Cfop(
-                                code = cfop.code,
-                                covertindCode = cfop.converting
-                            )
-                        )
+                        uiState.value.cfops.add(cfop.converterToDto())
                     }
-                    updateCfopSelected(uiState.value.cfops[0].code)
-                    updateCfopConvetido(uiState.value.cfops[0].covertindCode)
+                    updateViewCfops()
                 }
 
                 3 -> db?.cfopIndustrializacaoDao()?.getAll()?.collect {
                     uiState.value.cfops.clear()
                     for (cfop in it) {
-                        uiState.value.cfops.add(
-                            Cfop(
-                                code = cfop.code,
-                                covertindCode = cfop.converting
-                            )
-                        )
+                        uiState.value.cfops.add(cfop.converterToDto())
                     }
-                    updateCfopSelected(uiState.value.cfops[0].code)
-                    updateCfopConvetido(uiState.value.cfops[0].covertindCode)
+                    updateViewCfops()
                 }
             }
         }
     }
+
 
 
     fun updateCategory(category: Int) {
@@ -93,7 +76,12 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    fun updateCfopSelected(cfopSelected: String) {
+    private fun updateViewCfops() {
+        updateCfopSelected(uiState.value.cfops[0].code)
+        updateCfopConvetido(uiState.value.cfops[0].covertindCode)
+    }
+
+     fun updateCfopSelected(cfopSelected: String) {
         _uiState.value = _uiState.value.copy(cfopSelected = cfopSelected)
         Log.i(
             "HomeViewModel",
@@ -101,7 +89,7 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    fun updateCfopConvetido(cfopConvetido: String) {
+     fun updateCfopConvetido(cfopConvetido: String) {
         _uiState.value = _uiState.value.copy(cfopConvetido = cfopConvetido)
         Log.i(
             "HomeViewModel",
@@ -109,6 +97,8 @@ class HomeViewModel @Inject constructor(
         )
 
     }
+
+
 
 
 }

@@ -1,6 +1,6 @@
 package com.talespalma.cfopconvertmobile.models
 
-data class Cfop(
+data class CfopDTO(
     val code :String = "",
     val covertindCode : String = ""
 )
