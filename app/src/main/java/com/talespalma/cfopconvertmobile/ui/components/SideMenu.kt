@@ -34,7 +34,7 @@ fun SideMenuNavigation(modifier: Modifier = Modifier, navHostController: NavCont
         modifier = modifier
     ){
         NavigationRail(
-            containerColor = Color(0xFF000000).copy(alpha = 0.7F),
+            containerColor = Color( 0xFF, 0xFF, 0xFF).copy(alpha = 0.7F),
             modifier = Modifier.clip(RoundedCornerShape(20.dp))
         ){
             pages.forEachIndexed { index, item ->

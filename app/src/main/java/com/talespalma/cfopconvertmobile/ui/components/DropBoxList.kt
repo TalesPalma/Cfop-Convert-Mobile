@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,15 +40,16 @@ fun DropBoxList(
                 .clip(RoundedCornerShape(10.dp))
                 .fillMaxWidth()
                 .clickable { homeViewModel.updateExpanded(true) }
-                .background(color = Color(color = 0).copy(alpha = 0.5f))
+                .background(color = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.7f))
                 .padding(16.dp),
         ) {
             Column {
                 Text(
                     text = "Selecionado:${uiState.cfopSelected}",
-                    color = Color.White,
+                    color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = modifier.fillMaxWidth()
+                    modifier = modifier.fillMaxWidth(),
+                    fontWeight = FontWeight.Bold
                 )
                 Icon(
                     imageVector = Icons.Default.ArrowDropDown,
@@ -64,8 +66,8 @@ fun DropBoxList(
             onDismissRequest = { homeViewModel.updateExpanded(false) }) {
             uiState.cfops.forEach { cfop ->
                 DropdownMenuItem(
-                    modifier = Modifier.background(Color.Black),
-                    text = { Text(text = cfop.code, color = Color.White) },
+                    modifier = Modifier.background(Color.White),
+                    text = { Text(text = cfop.code, color = Color.Black) },
                     onClick = {
                         homeViewModel.updateCfopSelected(cfop.code)
                         homeViewModel.updateCfopConvetido(cfop.covertindCode)
