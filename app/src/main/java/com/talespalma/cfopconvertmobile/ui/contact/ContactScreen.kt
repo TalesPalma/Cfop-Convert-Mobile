@@ -1,5 +1,6 @@
 package com.talespalma.cfopconvertmobile.ui.contact
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,19 +15,17 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.talespalma.cfopconvertmobile.R
 
 
@@ -34,11 +33,11 @@ import com.talespalma.cfopconvertmobile.R
 fun ContactScreen(
     modifier: Modifier = Modifier,
 ) {
+    val viewModel : ContactViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.collectAsState()
+
     val image = painterResource(R.drawable.fundo)
     val colorElement  = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var message by remember { mutableStateOf("") }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -63,22 +62,22 @@ fun ContactScreen(
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
+            value = uiState.name,
+            onValueChange = { viewModel.updateName(it) },
             label = { Text("Nome") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
+            value = uiState.email,
+            onValueChange = { viewModel.updateEmail(it) },
             label = { Text("Email") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
-            value = message,
-            onValueChange = { message = it },
+            value = uiState.menssage,
+            onValueChange = { viewModel.updateMessage(it) },
             label = { Text("Mensagem") },
             modifier = Modifier
                 .fillMaxWidth()
