@@ -23,7 +23,11 @@ import androidx.navigation.compose.rememberNavController
 import com.talespalma.cfopconvertmobile.navigation.RoutesNav
 
 @Composable
-fun SideMenuNavigation(modifier: Modifier = Modifier, navHostController: NavController) {
+fun SideMenuNavigation(
+    modifier: Modifier = Modifier,
+    navHostController: NavController,
+    closeMenu: () -> Unit = {}
+) {
     var selectedItem by remember { mutableIntStateOf(0) }
     val pages = listOf(
         RoutesNav.Home,
@@ -46,6 +50,7 @@ fun SideMenuNavigation(modifier: Modifier = Modifier, navHostController: NavCont
                             onClick = {
                                 selectedItem = index
                                 navHostController.navigate(RoutesNav.Home.name)
+                                closeMenu()
                             }
                         )
                     }
@@ -57,6 +62,7 @@ fun SideMenuNavigation(modifier: Modifier = Modifier, navHostController: NavCont
                             onClick = {
                                 selectedItem = index
                                 navHostController.navigate(RoutesNav.Contact.name)
+                                closeMenu()
                             }
                         )
                     }

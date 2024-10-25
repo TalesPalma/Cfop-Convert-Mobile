@@ -73,7 +73,11 @@ fun InitApp() {
     }) { padding ->
         MyNavHost(navController = navController, modifier = Modifier.padding(padding))
         if (isVisible){
-            SideMenuNavigation(navHostController = navController, modifier = Modifier.padding(padding))
+            SideMenuNavigation(
+                navHostController = navController,
+                modifier = Modifier.padding(padding),
+                closeMenu = {isVisible = false}
+            )
         }
     }
 }
