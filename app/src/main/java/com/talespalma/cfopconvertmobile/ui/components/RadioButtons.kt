@@ -29,15 +29,16 @@ fun RadioButtons(
     homeViewModel: HomeViewModel
 ) {
     val radioColors = RadioButtonColors(
-        selectedColor = Color.Black,
+        selectedColor = Color.White,
         unselectedColor = Color.LightGray,
-        disabledSelectedColor = Color.White,
-        disabledUnselectedColor = Color.White
+        disabledSelectedColor = Color.Black,
+        disabledUnselectedColor = Color.Black
     )
+    val colorText = Color.White
 
     Column(
         modifier = modifier.clip(shape = RoundedCornerShape(20.dp))
-            .background(color = Color(0xFF, 0xFF, 0xFF).copy(alpha = 1.0F))
+            .background(color = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10F))
             .padding(top = 30.dp, end = 30.dp)
             .wrapContentSize(Alignment.Center)
     ) {
@@ -47,7 +48,7 @@ fun RadioButtons(
                 selected = (uiState.categorySelected == 1),
                 colors = radioColors
             )
-            Text("CFOP CONSUMO", color = Color.Black,fontWeight = FontWeight.Bold)
+            Text("CFOP CONSUMO", color = colorText,fontWeight = FontWeight.Bold)
         }
         Row {
             androidx.compose.material3.RadioButton(
@@ -55,7 +56,7 @@ fun RadioButtons(
                 selected = (uiState.categorySelected == 2),
                 colors = radioColors
             )
-            Text("CFOP REVENDA", color = Color.Black,fontWeight = FontWeight.Bold)
+            Text("CFOP REVENDA", color = colorText,fontWeight = FontWeight.Bold)
         }
         Row {
             androidx.compose.material3.RadioButton(
@@ -63,7 +64,7 @@ fun RadioButtons(
                 selected = (uiState.categorySelected == 3),
                 colors = radioColors
             )
-            Text("CFOP INDUSTRIALIZAÇÃO", color = Color.Black, fontWeight = FontWeight.Bold)
+            Text("CFOP INDUSTRIALIZAÇÃO", color = colorText, fontWeight = FontWeight.Bold)
         }
     }
 }

@@ -34,19 +34,20 @@ fun DropBoxList(
     uiState: HomeScreenState
 ) {
 
-    Box(modifier = Modifier.padding(top = 50.dp, end = 5.dp, start = 5.dp, bottom = 30.dp)) {
+    val colorElement  = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
+    Box(modifier = Modifier.padding(top = 200.dp, end = 5.dp, start = 5.dp, bottom = 30.dp)) {
         Row(
             modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))
                 .fillMaxWidth()
                 .clickable { homeViewModel.updateExpanded(true) }
-                .background(color = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.7f))
+                .background(colorElement)
                 .padding(16.dp),
         ) {
             Column {
                 Text(
                     text = "Selecionado:${uiState.cfopSelected}",
-                    color = Color.Black,
+                    color = Color.White,
                     textAlign = TextAlign.Center,
                     modifier = modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Bold
@@ -61,12 +62,12 @@ fun DropBoxList(
         }
 
         DropdownMenu(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier.align(Alignment.Center).background(colorElement),
             expanded = uiState.expanded,
             onDismissRequest = { homeViewModel.updateExpanded(false) }) {
             uiState.cfops.forEach { cfop ->
                 DropdownMenuItem(
-                    modifier = Modifier.background(Color.White),
+                    modifier = Modifier.background(colorElement),
                     text = { Text(text = cfop.code, color = Color.Black) },
                     onClick = {
                         homeViewModel.updateCfopSelected(cfop.code)
