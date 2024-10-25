@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +36,7 @@ fun ContactScreen(
 ) {
     val viewModel : ContactViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     val image = painterResource(R.drawable.fundo)
     val colorElement  = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
@@ -85,7 +87,10 @@ fun ContactScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { /* Lógica para enviar email */ },
+            onClick = {
+                val intentSendEmail = viewModel.sendEmailIntent()
+                context.startActivity(intentSendEmail)
+            },
             modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
             colors = ButtonDefaults.buttonColors().copy(
                 containerColor = colorElement,

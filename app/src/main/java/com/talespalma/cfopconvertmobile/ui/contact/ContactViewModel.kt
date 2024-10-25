@@ -1,6 +1,7 @@
 package com.talespalma.cfopconvertmobile.ui.contact
 
 import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,9 +36,14 @@ class ContactViewModel @Inject constructor() : ViewModel() {
         _uiState.value = _uiState.value.copy(menssage = newMessage)
     }
 
-    fun sendEmail(){
-    val currentInfos = uiState.value
-        val intent = Intent(Intent.ACTION_SENDTO).apply {  }
+    fun sendEmailIntent() : Intent{
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:") // Apenas apps de e-mail receberão a intent
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(_uiState.value.email))
+            putExtra(Intent.EXTRA_SUBJECT, "Contato pelo app")
+            putExtra(Intent.EXTRA_TEXT, _uiState.value.menssage)
+        }
+        return Intent.createChooser(emailIntent, "Escolha um aplicativo de email:")
     }
 
 
