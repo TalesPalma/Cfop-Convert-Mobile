@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,7 +54,7 @@ fun ContactScreen(
         text = "Entre em contato",
         textAlign = TextAlign.Center,
         modifier = Modifier.fillMaxWidth().padding(top = 120.dp),
-        fontSize = 50.sp,
+        style = MaterialTheme.typography.headlineLarge,
         color = Color.White,
     )
     Column(
@@ -66,21 +67,21 @@ fun ContactScreen(
         OutlinedTextField(
             value = uiState.name,
             onValueChange = { viewModel.updateName(it) },
-            label = { Text("Nome") },
+            label = { Text("Nome",color = Color.White) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = uiState.email,
             onValueChange = { viewModel.updateEmail(it) },
-            label = { Text("Email") },
+            label = { Text("Email",color = Color.White) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = uiState.menssage,
             onValueChange = { viewModel.updateMessage(it) },
-            label = { Text("Mensagem") },
+            label = { Text("Mensagem", color = Color.White) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(150.dp)

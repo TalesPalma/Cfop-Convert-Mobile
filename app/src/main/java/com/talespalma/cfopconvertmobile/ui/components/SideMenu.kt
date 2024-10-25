@@ -9,9 +9,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,8 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.talespalma.cfopconvertmobile.navigation.RoutesNav
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SideMenuNavigation(
@@ -28,7 +33,7 @@ fun SideMenuNavigation(
     navHostController: NavController,
     closeMenu: () -> Unit = {}
 ) {
-    var selectedItem by remember { mutableIntStateOf(0) }
+    val coroutineScope = rememberCoroutineScope()
     val pages = listOf(
         RoutesNav.Home,
         RoutesNav.Contact
@@ -36,37 +41,29 @@ fun SideMenuNavigation(
     val icons = listOf(Icons.Filled.Home, Icons.Filled.AccountCircle)
     Row(
         modifier = modifier
-    ){
+    ) {
         NavigationRail(
-            containerColor = Color( 0xFF, 0xFF, 0xFF).copy(alpha = 0.10F),
+            containerColor = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10F),
             modifier = Modifier.clip(RoundedCornerShape(20.dp))
-        ){
+        ) {
             pages.forEachIndexed { index, item ->
-                when (item) {
-                    RoutesNav.Home -> {
-                        NavigationRailItem(
-                            icon = { Icon(icons[index], contentDescription = "Home" , tint = Color.Black) },
-                            selected = selectedItem == index,
-                            onClick = {
-                                selectedItem = index
-                                navHostController.navigate(RoutesNav.Home.name)
-                                closeMenu()
-                            }
+                NavigationRailItem(
+                    icon = {
+                        Icon(
+                            icons[index],
+                            contentDescription = item.name,
+                            tint = Color.White
                         )
+                    },
+                    selected = false,
+                    onClick = {
+                        navHostController.navigate(item.name)
+                        coroutineScope.launch {
+                            delay(500)
+                            closeMenu()
+                        }
                     }
-
-                    RoutesNav.Contact -> {
-                        NavigationRailItem(
-                            icon = { Icon(icons[index], contentDescription = "Contact", tint = Color.Black) },
-                            selected = selectedItem == index,
-                            onClick = {
-                                selectedItem = index
-                                navHostController.navigate(RoutesNav.Contact.name)
-                                closeMenu()
-                            }
-                        )
-                    }
-                }
+                )
             }
         }
     }
@@ -79,7 +76,7 @@ private fun PreviewSideMenuNavigation() {
 }
 
 @Composable
-fun mockNavController()  : NavController{
+fun mockNavController(): NavController {
     val navController = rememberNavController()
     return navController
 }

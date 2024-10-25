@@ -1,6 +1,7 @@
 package com.talespalma.cfopconvertmobile.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.talespalma.cfopconvertmobile.ui.home.HomeScreenState
 import com.talespalma.cfopconvertmobile.ui.home.HomeViewModel
+import kotlinx.coroutines.delay
 
 
 @Composable
@@ -34,7 +36,8 @@ fun DropBoxList(
     uiState: HomeScreenState
 ) {
 
-    val colorElement  = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
+    val colorElement = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
+
     Box(modifier = Modifier.padding(top = 200.dp, end = 5.dp, start = 5.dp, bottom = 30.dp)) {
         Row(
             modifier = Modifier
@@ -42,6 +45,11 @@ fun DropBoxList(
                 .fillMaxWidth()
                 .clickable { homeViewModel.updateExpanded(true) }
                 .background(colorElement)
+                .border(
+                    width = 1.dp,
+                    color = Color.LightGray,
+                    shape = RoundedCornerShape(10.dp)
+                )
                 .padding(16.dp),
         ) {
             Column {
@@ -62,13 +70,17 @@ fun DropBoxList(
         }
 
         DropdownMenu(
-            modifier = Modifier.align(Alignment.Center).background(colorElement),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .background(Color.Black),
             expanded = uiState.expanded,
-            onDismissRequest = { homeViewModel.updateExpanded(false) }) {
+            onDismissRequest = {
+                    homeViewModel.updateExpanded(false)
+            }) {
             uiState.cfops.forEach { cfop ->
                 DropdownMenuItem(
-                    modifier = Modifier.background(colorElement),
-                    text = { Text(text = cfop.code, color = Color.Black) },
+                    modifier = Modifier.background(Color.Black),
+                    text = { Text(text = cfop.code, color = Color.White) },
                     onClick = {
                         homeViewModel.updateCfopSelected(cfop.code)
                         homeViewModel.updateCfopConvetido(cfop.covertindCode)

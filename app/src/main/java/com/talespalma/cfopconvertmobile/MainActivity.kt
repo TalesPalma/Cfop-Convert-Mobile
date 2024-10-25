@@ -76,7 +76,7 @@ fun InitApp() {
             SideMenuNavigation(
                 navHostController = navController,
                 modifier = Modifier.padding(padding),
-                closeMenu = {isVisible = false}
+                closeMenu = {isVisible = false},
             )
         }
     }
