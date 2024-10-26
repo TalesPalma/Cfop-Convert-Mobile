@@ -1,6 +1,5 @@
 package com.talespalma.cfopconvertmobile.ui.contact
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,7 +25,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.talespalma.cfopconvertmobile.R
 
@@ -35,12 +33,12 @@ import com.talespalma.cfopconvertmobile.R
 fun ContactScreen(
     modifier: Modifier = Modifier,
 ) {
-    val viewModel : ContactViewModel = hiltViewModel()
+    val viewModel: ContactViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
     val image = painterResource(R.drawable.fundo)
-    val colorElement  = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
+    val colorElement = Color(0xFF, 0xFF, 0xFF).copy(alpha = 0.10f)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -53,7 +51,9 @@ fun ContactScreen(
     Text(
         text = "Entre em contato",
         textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxWidth().padding(top = 120.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 120.dp),
         style = MaterialTheme.typography.headlineLarge,
         color = Color.White,
     )
@@ -67,14 +67,7 @@ fun ContactScreen(
         OutlinedTextField(
             value = uiState.name,
             onValueChange = { viewModel.updateName(it) },
-            label = { Text("Nome",color = Color.White) },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = uiState.email,
-            onValueChange = { viewModel.updateEmail(it) },
-            label = { Text("Email",color = Color.White) },
+            label = { Text("Nome", color = Color.White) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -92,7 +85,9 @@ fun ContactScreen(
                 val intentSendEmail = viewModel.sendEmailIntent()
                 context.startActivity(intentSendEmail)
             },
-            modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors().copy(
                 containerColor = colorElement,
                 contentColor = Color.White

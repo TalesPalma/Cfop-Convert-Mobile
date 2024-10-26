@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 data class  ContactInfos(
     val name: String = "",
-    val email: String = "",
     val menssage: String = ""
 )
 
@@ -28,10 +27,6 @@ class ContactViewModel @Inject constructor() : ViewModel() {
         _uiState.value = _uiState.value.copy(name = newName)
     }
 
-    fun updateEmail(newEmail: String){
-        _uiState.value = _uiState.value.copy(email = newEmail)
-    }
-
     fun updateMessage(newMessage: String){
         _uiState.value = _uiState.value.copy(menssage = newMessage)
     }
@@ -39,7 +34,7 @@ class ContactViewModel @Inject constructor() : ViewModel() {
     fun sendEmailIntent() : Intent{
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // Apenas apps de e-mail receberão a intent
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(_uiState.value.email))
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("cfopConvertSuport@gmail.com"))
             putExtra(Intent.EXTRA_SUBJECT, "Contato pelo app")
             putExtra(Intent.EXTRA_TEXT, _uiState.value.menssage)
         }
